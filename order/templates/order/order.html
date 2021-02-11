@@ -1,21 +1,46 @@
 {% extends 'base.html' %}
 {% block body %}
 
-{% for menu in menus %}
+<div class="container">
+  {% for store in stores %}
+<h4><b>{{store.name}}</b></h4>
+
 <div class="row">
-    <div class="col s12 m7">
-      <div class="card">
-        <div class="card-image">
-          <img src="https://materializecss.com/images/sample-1.jpg">
-          <span class="card-title">{{menu.name}}</span>
-        </div>
-        <div class="card-content">
-          <p>price: {{menu.price}}</p>
-        </div>
+{% for menu in store.menus.all %}
+  <div class="col s12 m3">
+    <div class="card">
+      <div class="card-image">
+        <img src="https://materializecss.com/images/sample-1.jpg">
+        <span class="card-title">{{menu.name}}</span>
+      </div>
+      <div class="card-content">
+        <p>배달비 제외 가격: {{menu.price}}</p>
+        <!-- Modal Trigger -->
+  <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Details</a>
       </div>
     </div>
   </div>
 
 {% endfor %}
+</div>
+{% empty %}
+<div>there is no stores</div>
+{% endfor %}
+</div>
+
+
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <h4>Modal Header</h4>
+      <p>A bunch of text</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+  </div>
+  <script>
+      M.AutoInit();
+  </script>
 
 {% endblock %}
